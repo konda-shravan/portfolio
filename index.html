@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konda Shravan</title>
+    <link rel="icon" type="image/png" href="./title.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Tropical Mist Color Variables */
+      :root {
+        --primary: #2c3e50; /* Dark Blue */
+        --accent: #e67e22; /* Orange Accent */
+        --bg-light: #ecf0f1; /* Light Gray Background */
+        --section-bg: #ffffff; /* White Sections */
+        --text-main: #34495e; /* Slightly Lighter Dark */
+        --divider: #bdc3c7; /* Gray Divider */
+      }
+
+      /* Global resets & typography */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-main);
+        background: var(--bg-light);
+        margin: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      /* Two Column Layout */
+      .two-column-layout {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .left-column {
+        flex: 0 0 20%;
+        position: sticky;
+        top: 2rem;
+        height: fit-content;
+        padding-right: 1rem;
+        border-right: 2px solid var(--divider);
+      }
+
+      .right-column {
+        flex: 0 0 80%;
+      }
+
+      .section-container {
+        margin-bottom: 3rem;
+        min-height: 100px;
+      }
+
+      .section-container:last-child {
+        margin-bottom: 0;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+        padding-bottom: 0.3rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 3px solid var(--accent);
+        display: inline-block;
+        color: var(--primary);
+      }
+
+      /* Sections */
+      section {
+        padding: 2rem;
+        background: var(--section-bg);
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Left Column Titles */
+      .left-column .section-title {
+        display: block;
+        margin-bottom: 2rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .left-column .section-title:hover {
+        color: var(--accent);
+      }
+
+      /* Right Column Content */
+      .right-column section {
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+      }
+
+      .right-column section:hover {
+        opacity: 1;
+      }
+
+      /* Header */
+      header {
+        padding: 2rem;
+        background: var(--primary);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 0.5rem;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .profile-img {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid var(--accent);
+        flex-shrink: 0;
+        margin-left: 40px;
+      }
+      .header-content {
+        flex: 1;
+        text-align: center;
+      }
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.2rem;
+        color: #fff;
+      }
+      header p.lead,
+      header p.mb-0 a {
+        color: #f0f9f4;
+      }
+      header a {
+        text-decoration: none;
+        border-bottom: 1px dotted #f0f9f4;
+      }
+      header a:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      /* Divider */
+      .section-divider {
+        height: 4px;
+        background: var(--divider);
+        margin: 2rem 0;
+        border: 0;
+        border-radius: 2px;
+      }
+
+      /* Lists */
+      ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+      }
+      ul li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+        text-align: left;
+        line-height: 1.5;
+      }
+      ul li:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+
+      /* Projects */
+      .project-list .nav-link {
+        background: #34495e;
+        color: #fff;
+        border-left: 3px solid transparent;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s ease;
+        margin-bottom: 0.5rem;
+        border-radius: 5px;
+      }
+      .project-list .nav-link:hover {
+        background: #2c3e50;
+        border-color: var(--accent);
+        color: #fff;
+        transform: translateX(5px);
+      }
+      .project-list .nav-link.active {
+        background: var(--accent);
+        color: #fff !important;
+        border-color: #fff;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 1.5rem 0;
+        color: var(--text-main);
+      }
+      footer a {
+        color: var(--primary);
+        text-decoration: none;
+        margin: 0 10px;
+      }
+      footer a:hover {
+        opacity: 0.8;
+      }
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+      .social-icons img {
+        width: 30px;
+        height: 30px;
+        transition: transform 0.3s ease;
+      }
+      .social-icons img:hover {
+        transform: scale(1.1);
+      }
+
+      /* Main Layout */
+      .main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .section-container {
+        display: flex;
+        margin-bottom: 1rem;
+        gap: 2rem;
+        align-items: flex-start;
+      }
+
+      .section-container:last-child {
+        margin-bottom: 0;
+      }
+
+      .section-title {
+        flex: 0 0 10%;
+        font-size: 1.6rem;
+        padding-bottom: 0.3rem;
+        border-bottom: 3px solid var(--accent);
+        display: inline-block;
+        color: var(--primary);
+        text-align: center;
+        margin: 0;
+        padding-top: 1rem;
+      }
+
+      .section-content {
+        flex: 0 0 90%;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      /* Sections */
+      section {
+        padding: 2rem;
+        background: var(--section-bg);
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        width: 100%;
+      }
+
+      /* Project Tabs */
+      .project-list {
+        text-align: left;
+      }
+
+      .project-list .nav-link {
+        text-align: left;
+        justify-content: flex-start;
+      }
+
+      .tab-content {
+        text-align: left;
+      }
+
+      .tab-content p {
+        text-align: left;
+      }
+
+      /* Additional project alignment rules */
+      .nav.flex-column.nav-pills {
+        text-align: left;
+      }
+
+      .nav.flex-column.nav-pills .nav-link {
+        text-align: left !important;
+        justify-content: flex-start !important;
+        width: 80%;
+      }
+
+      .tab-pane {
+        text-align: left;
+      }
+
+      .tab-pane p {
+        text-align: left !important;
+      }
+
+      /* Experience Items */
+      .experience-item {
+        text-align: left;
+        margin-bottom: 2rem;
+      }
+
+      .experience-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .experience-item h5 {
+        margin-bottom: 0.5rem;
+      }
+
+      .experience-item small {
+        display: block;
+        margin-bottom: 1rem;
+      }
+
+      /* Responsibilities List */
+      .responsibilities-list {
+        width: 100%;
+      }
+
+      .responsibilities-list ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      .responsibilities-list li {
+        margin-bottom: 0.75rem;
+        line-height: 1.5;
+      }
+
+      .responsibilities-list li:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Tech Stack */
+      .tech-stack-list {
+        width: 100%;
+      }
+
+      .tech-stack-list ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      .tech-stack-list li {
+        margin-bottom: 0.75rem;
+        line-height: 1.5;
+      }
+
+      .tech-stack-list li:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Education section adjustment */
+      .education-section {
+        margin-left: -8px;
+      }
+
+      /* Education section content width adjustment */
+      .education-section .section-content {
+        flex: 0 0 89%;
+      }
+
+      /* Work Experience section adjustment */
+      .work-experience-section {
+        margin-left: -19px;
+      }
+
+      /* Work Experience section content width adjustment */
+      .work-experience-section .section-content {
+        flex: 0 0 88%;
+      }
+
+      /* Languages section adjustment */
+      .languages-section {
+        margin-left: -16px;
+      }
+
+      /* Languages section content width adjustment */
+      .languages-section .section-content {
+        flex: 0 0 88%;
+      }
+
+      /* Roles & Responsibilities section adjustment */
+      .responsibilities-section {
+        margin-left: -75px;
+      }
+
+      /* Roles & Responsibilities section content width adjustment */
+      .responsibilities-section .section-content {
+        flex: 0 0 84%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container mt-2">
+      <!-- Header -->
+      <header>
+        <img src="./profile-pic.jpeg" alt="Profile" class="profile-img" />
+        <div class="header-content">
+          <h1>Konda Shravan</h1>
+          <p class="lead mb-1">Full Stack Developer</p>
+          <p class="mb-0">
+            Hyderabad, India |
+            <a href="mailto:konda.shravan@outlook.com"
+              >konda.shravan@outlook.com</a
+            >
+            | +91 8125931731 |
+            <a
+              href="https://www.linkedin.com/in/kondas1202/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >linkedin.com/in/kondas1202</a
+            >
+          </p>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- About Me -->
+        <div class="section-container">
+          <h2 class="section-title">About Me</h2>
+          <div class="section-content">
+            <section id="about">
+              <p>
+                Full Stack Developer with 9 years of experience in building scalable web applications using React.js, Vue.js, Spring Boot, Node.js and Ruby on Rails. Skilled in developing secure APIs, deploying cloud-native solutions on AWS/Azure, and implementing CI/CD pipelines. Strong background in agile environments with international team collaboration. German language proficiency: A2. Open to relocation within Europe.
+              </p>
+            </section>
+          </div>
+        </div>
+
+        <!-- Work Experience -->
+        <div class="section-container work-experience-section">
+          <h2 class="section-title">Work Experience</h2>
+          <div class="section-content">
+            <section id="experience">
+              <div class="experience-item">
+                <h5>
+                  Associate Lead <span class="text-muted">@ Proarch IT Solutions (Client: CHS)</span>
+                </h5>
+                <small class="text-muted">January 2024 - Present | Remote</small>
+                <ul>
+                  <li>
+                    Developed and maintained scalable healthcare modules for electronic medical records (EMR) and patient billing systems using Vue.js and Spring Boot, ensuring HIPAA compliance and data security.
+                  </li>
+                  <li>
+                    Optimized backend APIs and frontend components, improving system response times by 40% and reducing patient on boarding delays in medical practice applications.
+                  </li>
+                  <li>
+                    Collaborated with cross-functional teams (QA, DevOps, Product) to deliver critical CHS product features, including e-prescriptions, sick note automation, and direct EMR connectivity.
+                  </li>
+                </ul>
+              </div>
+              <div class="experience-item">
+                <h5>
+                  Senior Consultant - React
+                  <span class="text-muted">@ O2F INFO SOLUTIONS PVT LTD (Client: Microsoft)</span>
+                </h5>
+                <small class="text-muted">May 2022 – April 2023 | Remote</small>
+                <ul>
+                  <li>Developed and maintained a Quote Center Service platform using React.js and Spring Boot, enabling dynamic quote generation, approval workflows, and audit tracking for enterprise users.</li>
+                </ul>
+              </div>
+              <div class="experience-item">
+                <h5>
+                  Senior Software Engineer
+                  <span class="text-muted">@ Ebix</span>
+                </h5>
+                <small class="text-muted">April 2021 – April 2022 | Remote</small>
+                <ul>
+                  <li>Built and maintained interactive React.js components for policy quoting, underwriting workflows, and claims tracking, ensuring high performance and accessibility across user roles.</li>
+                  <li>Developed and optimized Ruby on Rails backend APIs to handle policy issuance, endorsements, renewals and premium calculations integrating with third-party payment and compliance services.</li>
+                </ul>
+              </div>
+              <div class="experience-item">
+                <h5>
+                  Senior Associate Technology
+                  <span class="text-muted">@ Clarosoft Solutions Limited</span>
+                </h5>
+                <small class="text-muted">February 2017 – April 2021 | Full-Time</small>
+                <ul>
+                  <li>Developed dynamic and SEO-optimized React.js fronted features for service listings, vendor comparisons quote requests, and customer reviews to improve user engagement and lead conversion.</li>
+                  <li>Built scalable Node.js backend services with Express.js for vendor on boarding, location-based service filtering, quote management, and real-time customer inquiry tracking.</li>
+                </ul>
+              </div>
+              <div class="experience-item">
+                <h5>
+                  Software Engineer
+                  <span class="text-muted">@ Trigent Software Inc (Client – CTS)</span>
+                </h5>
+                <small class="text-muted">December 2015 – January 2017 | Full-Time</small>
+                <ul>
+                  <li>Contributed to the development of an IoT platform for Amazon's Product Care and Food Care initiatives</li>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="section-container">
+          <h2 class="section-title">Tech Stack</h2>
+          <div class="section-content">
+            <section id="tech">
+              <div class="tech-stack-list">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <ul>
+                      <li>React.js</li>
+                      <li>Vue.js</li>
+                      <li>Tailwind</li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-4">
+                    <ul>
+                      <li>Spring Framework (Spring Boot)</li>
+                      <li>Node.js</li>
+                      <li>Ruby on Rails</li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-4">
+                    <ul>
+                      <li>Webpack</li>
+                      <li>Ruby</li>
+                      <li>AWS/Azure</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section-container education-section">
+          <h2 class="section-title">Education</h2>
+          <div class="section-content">
+            <section id="education">
+              <div>
+                <h5>
+                  Bachelor of Technology (B.Tech) in Information Technology
+                  <span class="text-muted">@ Completed in 2011</span>
+                </h5>
+                <small class="text-muted">2011</small>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="section-container languages-section">
+          <h2 class="section-title">Languages</h2>
+          <div class="section-content">
+            <section id="languages">
+              <div class="row">
+                <div class="col-sm-6">
+                  <ul>
+                    <li>English (C1)</li>
+                  </ul>
+                </div>
+                <div class="col-sm-6">
+                  <ul>
+                    <li>German (A2)</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="section-container">
+          <h2 class="section-title">Projects</h2>
+          <div class="section-content">
+            <section id="projects">
+              <div class="row">
+                <div class="col-md-4 project-list">
+                  <div
+                    class="nav flex-column nav-pills"
+                    id="project-tabs"
+                    role="tablist"
+                    aria-label="Project tabs"
+                  >
+                    <button
+                      class="nav-link active"
+                      id="proj1-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#proj1"
+                      type="button"
+                      role="tab"
+                      aria-controls="proj1"
+                      aria-selected="true"
+                    >
+                      Portfolio Website
+                    </button>
+                    <button
+                      class="nav-link"
+                      id="proj2-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#proj2"
+                      type="button"
+                      role="tab"
+                      aria-controls="proj2"
+                      aria-selected="false"
+                    >
+                      Task Manager
+                    </button>
+                    <button
+                      class="nav-link"
+                      id="proj3-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#proj3"
+                      type="button"
+                      role="tab"
+                      aria-controls="proj3"
+                      aria-selected="false"
+                    >
+                      E-Commerce Prototype
+                    </button>
+                    <button
+                      class="nav-link"
+                      id="proj4-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#proj4"
+                      type="button"
+                      role="tab"
+                      aria-controls="proj4"
+                      aria-selected="false"
+                    >
+                      Chat Application
+                    </button>
+                    <button
+                      class="nav-link"
+                      id="proj5-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#proj5"
+                      type="button"
+                      role="tab"
+                      aria-controls="proj5"
+                      aria-selected="false"
+                    >
+                      Data Dashboard
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="tab-content" id="project-tabs-content">
+                    <div class="tab-pane fade show active" id="proj1">
+                      <p>
+                        <strong>Portfolio Website:</strong> Built a responsive
+                        portfolio site using React and Bootstrap with smooth
+                        scroll and contact form integration. Lorem Lorem ipsum
+                        dolor sit amet consectetur adipisicing elit. Minus nam
+                        quos amet, ullam ex totam eius aut mollitia accusamus
+                        illo neque, blanditiis temporibus, quo animi impedit
+                        minima optio nisi aliquam.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, sapiente blanditiis, recusandae maiores, dolores officia mollitia aspernatur omnis culpa rem temporibus corporis nesciunt ex incidunt! Nesciunt excepturi soluta minus maiores.
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, sed quos! Laborum consequatur sit, atque, sint ratione beatae ipsam ut excepturi quam cum inventore consequuntur deleniti dignissimos ipsa delectus ad!
+                        <br><br><strong>Environment:</strong> Java, React, Vue.js
+                      </p>
+                    </div>
+                    <div class="tab-pane fade" id="proj2">
+                      <p>
+                        <strong>Task Manager:</strong> Full-stack MERN app
+                        featuring JWT authentication, real-time updates with
+                        WebSockets, and a sleek UI.
+                        <br><br><strong>Environment:</strong> Java, React, Vue.js
+                      </p>
+                    </div>
+                    <div class="tab-pane fade" id="proj3">
+                      <p>
+                        <strong>E-Commerce Prototype:</strong> Implemented
+                        product listings, cart functionality, and payment
+                        integration using Stripe API.
+                        <br><br><strong>Environment:</strong> Java, React, Vue.js
+                      </p>
+                    </div>
+                    <div class="tab-pane fade" id="proj4">
+                      <p>
+                        <strong>Chat Application:</strong> Real-time chat with
+                        group rooms and file sharing powered by Socket.IO and
+                        Node.js.
+                        <br><br><strong>Environment:</strong> Java, React, Vue.js
+                      </p>
+                    </div>
+                    <div class="tab-pane fade" id="proj5">
+                      <p>
+                        <strong>Data Dashboard:</strong> Interactive charts
+                        built with Chart.js and D3.js to visualize sales metrics
+                        and user behavior.
+                        <br><br><strong>Environment:</strong> Java, React, Vue.js
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Responsibilities -->
+        <div class="section-container responsibilities-section">
+          <h2 class="section-title">Roles & Responsibilities</h2>
+          <div class="section-content">
+            <section id="responsibilities">
+              <div class="responsibilities-list">
+                <ul>
+                  <li>
+                    Designed and implemented RESTful APIs for client
+                    applications.
+                  </li>
+                  <li>
+                    Collaborated with cross-functional teams to define project
+                    requirements.
+                  </li>
+                  <li>
+                    Optimized database schemas for performance and scalability.
+                  </li>
+                  <li>
+                    Developed user interfaces with responsive design principles.
+                  </li>
+                  <li>
+                    Wrote unit and integration tests to ensure code quality.
+                  </li>
+                  <li>
+                    Performed code reviews and provided constructive feedback.
+                  </li>
+                  <li>Maintained CI/CD pipelines for automated deployments.</li>
+                  <li>
+                    Documented technical specifications and API endpoints.
+                  </li>
+                  <li>
+                    Troubleshooted production issues and implemented fixes.
+                  </li>
+                  <li>
+                    Mentored junior developers and onboarded new team members.
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <footer>
+        <div class="social-icons">
+          <a
+            href="https://www.linkedin.com/in/kondas1202/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
+              alt="LinkedIn"
+            />
+          </a>
+          <a
+            href="https://github.com/konda-shravan"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+              alt="GitHub"
+            />
+          </a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get all section titles in the left column
+        const sectionTitles = document.querySelectorAll(
+          ".left-column .section-title"
+        );
+
+        // Add click event to each title
+        sectionTitles.forEach((title) => {
+          title.addEventListener("click", function () {
+            // Get the corresponding section ID
+            const sectionId = this.textContent
+              .toLowerCase()
+              .replace(/\s+/g, "-");
+            const targetSection = document.getElementById(sectionId);
+
+            if (targetSection) {
+              // Scroll to the section
+              targetSection.scrollIntoView({ behavior: "smooth" });
+
+              // Highlight the section
+              targetSection.style.opacity = "1";
+              setTimeout(() => {
+                targetSection.style.opacity = "0.7";
+              }, 1000);
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
