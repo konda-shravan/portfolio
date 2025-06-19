@@ -52,7 +52,7 @@
         top: 2rem;
         height: fit-content;
         padding-right: 1rem;
-        border-right: 2px solid var(--divider);
+        border-right: none !important;
       }
 
       .right-column {
@@ -80,11 +80,12 @@
       /* Sections */
       section {
         padding: 2rem;
-        background: var(--section-bg);
         border-radius: 0.75rem;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         width: 100%;
-        height: 100%;
+      }
+      .white-bg-section {
+        background: var(--section-bg);
       }
 
       /* Left Column Titles */
@@ -122,9 +123,9 @@
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
       .profile-img {
-        width: 140px;
-        height: 140px;
-        object-fit: cover;
+        width: 100%;
+        max-width: 140px;
+        height: auto;
         border-radius: 50%;
         border: 4px solid var(--accent);
         flex-shrink: 0;
@@ -410,6 +411,27 @@
       .responsibilities-section .section-content {
         flex: 0 0 84%;
       }
+
+      /* Add right border only to Work Experience and Projects */
+      .work-experience-section,
+      .projects-section {
+        border-right: 2px solid var(--divider) !important;
+      }
+
+      @media (max-width: 768px) {
+        .section-container {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .section-title, .section-content {
+          flex: 1 1 100%;
+          text-align: left;
+          padding-top: 0.5rem;
+        }
+        .main-content, section {
+          padding: 1rem;
+        }
+      }
     </style>
   </head>
 
@@ -444,18 +466,22 @@
           <h2 class="section-title">About Me</h2>
           <div class="section-content">
             <section id="about">
-              <p>
-                Full Stack Developer with 9 years of experience in building scalable web applications using React.js, Vue.js, Spring Boot, Node.js and Ruby on Rails. Skilled in developing secure APIs, deploying cloud-native solutions on AWS/Azure, and implementing CI/CD pipelines. Strong background in agile environments with international team collaboration. German language proficiency: A2. Open to relocation within Europe.
-              </p>
+              <ul>
+                <li>Full Stack Developer with 9 years of experience in building scalable web applications using React.js, Vue.js, Spring Boot, Node.js and Ruby on Rails.</li>
+                <li>Skilled in developing secure APIs, deploying cloud-native solutions on AWS/Azure, and implementing CI/CD pipelines.</li>
+                <li>Strong background in agile environments with international team collaboration.</li>
+                <li>German language proficiency: A2.</li>
+                <li>Open to relocation within Europe.</li>
+              </ul>
             </section>
           </div>
         </div>
 
         <!-- Work Experience -->
-        <div class="section-container work-experience-section">
+        <div class="section-container work-experience-section" style="border-right:2px solid var(--divider);">
           <h2 class="section-title">Work Experience</h2>
           <div class="section-content">
-            <section id="experience">
+            <section id="experience" class="white-bg-section">
               <div class="experience-item">
                 <h5>
                   Associate Lead <span class="text-muted">@ Proarch IT Solutions (Client: CHS)</span>
@@ -524,31 +550,11 @@
           <h2 class="section-title">Tech Stack</h2>
           <div class="section-content">
             <section id="tech">
-              <div class="tech-stack-list">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <ul>
-                      <li>React.js</li>
-                      <li>Vue.js</li>
-                      <li>Tailwind</li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-4">
-                    <ul>
-                      <li>Spring Framework (Spring Boot)</li>
-                      <li>Node.js</li>
-                      <li>Ruby on Rails</li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-4">
-                    <ul>
-                      <li>Webpack</li>
-                      <li>Ruby</li>
-                      <li>AWS/Azure</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <ul>
+                <li>React.js, Vue.js, Tailwind</li>
+                <li>Spring Framework (Spring Boot), Node.js, Ruby on Rails</li>
+                <li>Webpack, Ruby, AWS/Azure</li>
+              </ul>
             </section>
           </div>
         </div>
@@ -558,13 +564,9 @@
           <h2 class="section-title">Education</h2>
           <div class="section-content">
             <section id="education">
-              <div>
-                <h5>
-                  Bachelor of Technology (B.Tech) in Information Technology
-                  <span class="text-muted">@ Completed in 2011</span>
-                </h5>
-                <small class="text-muted">2011</small>
-              </div>
+              <ul>
+                <li>Bachelor of Technology (B.Tech) in Information Technology (2011)</li>
+              </ul>
             </section>
           </div>
         </div>
@@ -574,27 +576,19 @@
           <h2 class="section-title">Languages</h2>
           <div class="section-content">
             <section id="languages">
-              <div class="row">
-                <div class="col-sm-6">
-                  <ul>
-                    <li>English (C1)</li>
-                  </ul>
-                </div>
-                <div class="col-sm-6">
-                  <ul>
-                    <li>German (A2)</li>
-                  </ul>
-                </div>
-              </div>
+              <ul>
+                <li>English (C1)</li>
+                <li>German (A2)</li>
+              </ul>
             </section>
           </div>
         </div>
 
         <!-- Projects -->
-        <div class="section-container">
+        <div class="section-container projects-section" style="border-right:2px solid var(--divider);">
           <h2 class="section-title">Projects</h2>
           <div class="section-content">
-            <section id="projects">
+            <section id="projects" class="white-bg-section">
               <div class="row">
                 <div class="col-md-4 project-list">
                   <div
@@ -725,40 +719,18 @@
           <h2 class="section-title">Roles & Responsibilities</h2>
           <div class="section-content">
             <section id="responsibilities">
-              <div class="responsibilities-list">
-                <ul>
-                  <li>
-                    Designed and implemented RESTful APIs for client
-                    applications.
-                  </li>
-                  <li>
-                    Collaborated with cross-functional teams to define project
-                    requirements.
-                  </li>
-                  <li>
-                    Optimized database schemas for performance and scalability.
-                  </li>
-                  <li>
-                    Developed user interfaces with responsive design principles.
-                  </li>
-                  <li>
-                    Wrote unit and integration tests to ensure code quality.
-                  </li>
-                  <li>
-                    Performed code reviews and provided constructive feedback.
-                  </li>
-                  <li>Maintained CI/CD pipelines for automated deployments.</li>
-                  <li>
-                    Documented technical specifications and API endpoints.
-                  </li>
-                  <li>
-                    Troubleshooted production issues and implemented fixes.
-                  </li>
-                  <li>
-                    Mentored junior developers and onboarded new team members.
-                  </li>
-                </ul>
-              </div>
+              <ul>
+                <li>Designed and implemented RESTful APIs for client applications.</li>
+                <li>Collaborated with cross-functional teams to define project requirements.</li>
+                <li>Optimized database schemas for performance and scalability.</li>
+                <li>Developed user interfaces with responsive design principles.</li>
+                <li>Wrote unit and integration tests to ensure code quality.</li>
+                <li>Performed code reviews and provided constructive feedback.</li>
+                <li>Maintained CI/CD pipelines for automated deployments.</li>
+                <li>Documented technical specifications and API endpoints.</li>
+                <li>Troubleshooted production issues and implemented fixes.</li>
+                <li>Mentored junior developers and onboarded new team members.</li>
+              </ul>
             </section>
           </div>
         </div>
